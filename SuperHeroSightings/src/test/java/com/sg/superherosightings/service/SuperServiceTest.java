@@ -5,7 +5,13 @@
  */
 package com.sg.superherosightings.service;
 
-import com.sg.superherosightings.dao.SuperHeroDaoTemp;
+import TempDaoTest.HeroRepInMem;
+import TempDaoTest.LocRepInMem;
+import TempDaoTest.OrgRepInMem;
+import TempDaoTest.PowerRepInMem;
+import TempDaoTest.SightRepInMem;
+import TempDaoTest.SuperHeroDaoInMem;
+import com.sg.superherosightings.dao.SuperHeroDao;
 import com.sg.superherosightings.models.Hero;
 import com.sg.superherosightings.models.Location;
 import com.sg.superherosightings.models.Organization;
@@ -28,12 +34,13 @@ import org.junit.jupiter.api.Test;
  */
 public class SuperServiceTest {
     
-    HeroRep heroRepTest;
-    PowerRep powerRepTest;
-    OrganizationRep orgRepTest;
-    LocationRep locRepTest;
-    SightingRep sightRepTest;
-    SuperHeroDaoTemp superTempTest;
+    HeroRep heroRepTest = new HeroRepInMem();
+    PowerRep powerRepTest = new PowerRepInMem();
+    OrganizationRep orgRepTest = new OrgRepInMem();
+    LocationRep locRepTest = new LocRepInMem();
+    SightingRep sightRepTest = new SightRepInMem();
+    SuperHeroDao superHeroDaoTest = new SuperHeroDaoInMem();
+    
             
             
     public SuperServiceTest() {
@@ -41,29 +48,31 @@ public class SuperServiceTest {
 
     @BeforeEach
     public void setUp() {
-
+        
     }
 
     @Test
     public void getHeroByIdGoldenPath() {
-        Optional<Hero> heroes = heroRepTest.findById(id);
-        Hero toReturn = null;
-        toReturn = heroes.get();
+        Optional<Hero> heroes = heroRepTest.findById(1);
+        
         
     }
 
     @Test
     public void deleteHeroGoldenPath() {
-        heroRepTest.deleteById(id);
+        heroRepTest.deleteById(1);
     }
 
     @Test
     public void addHeroGoldenPath() {
+        Hero newHero = new Hero();
         heroRepTest.save(newHero);
     }
 
     @Test
     public void editHeroGoldenPath() {
+        Optional<Hero> toEdit = heroRepTest.findById(1);
+        
         heroRepTest.save(toEdit);
     }
 
@@ -75,30 +84,32 @@ public class SuperServiceTest {
 
     @Test
     public void getPowerByIdGoldenPath() {
-        Optional<Power> powers = powerRepTest.findById(id);
-        Power toReturn = null;
-        toReturn = powers.get();
+        Optional<Power> powers = powerRepTest.findById(1);
+        
         
     }
 
     @Test
     public void deletePowerGoldenPath() {
-        powerRepTest.deleteById(id);
+        powerRepTest.deleteById(1);
     }
 
     @Test
     public void addPowerGoldenPath() {
+        Power newPower = new Power();
         powerRepTest.save(newPower);
     }
 
     @Test
     public void getAllPowersGoldenPath() {
         List<Power> allPowers = powerRepTest.findAll();
-        return allPowers;
+        
     }
 
     @Test
     public void editPowerGoldenPath() {
+        Optional<Power> toEdit = powerRepTest.findById(1);
+        
         powerRepTest.save(toEdit);
     }
 
@@ -115,19 +126,20 @@ public class SuperServiceTest {
 
     @Test
     public void deleteSightingGoldenPath() {
-        sightRepTest.deleteById(id);
+        sightRepTest.deleteById(1);
     }
 
     @Test
     public void getSightingByIdGoldenPath() {
-        Optional<Sighting> sightings = sightRepTest.findById(id);
-        Sighting toReturn = null;
-        toReturn = sightings.get();
+        Optional<Sighting> sightings = sightRepTest.findById(1);
+        
         
     }
 
     @Test
     public void editSightingGoldenPath() {
+        Optional<Sighting> toEdit = sightRepTest.findById(1);
+        
         sightRepTest.save(toEdit);
     }
 
@@ -138,7 +150,7 @@ public class SuperServiceTest {
 
     @Test
     public void deleteOrgGoldenPath() {
-        orgRepTest.deleteById(id);
+        orgRepTest.deleteById(1);
     }
 
     @Test
@@ -149,14 +161,15 @@ public class SuperServiceTest {
 
     @Test
     public void getOrgByIdGoldenPath() {
-        Optional<Organization> organizations = orgRepTest.findById(id);
-        Organization toReturn = null;
-        toReturn = organizations.get();
+        Optional<Organization> organizations = orgRepTest.findById(1);
+        
         
     }
 
     @Test
     public void editOrgGoldenPath() {
+        Optional<Organization> toEdit = orgRepTest.findById(1);
+        
         orgRepTest.save(toEdit);
     }
 
@@ -173,18 +186,20 @@ public class SuperServiceTest {
 
     @Test
     public void deleteLocationGoldenPath() {
-        locRepTest.deleteById(id);
+        locRepTest.deleteById(1);
     }
 
     @Test
     public void getLocationByIdGoldenPath() {
-        Optional<Location> locations = locRepTest.findById(id);
+        Optional<Location> locations = locRepTest.findById(1);
         
         
     }
 
     @Test
     public void editLocationGoldenPath() {
+        Optional<Location> toEdit = locRepTest.findById(1);
+        
         locRepTest.save(toEdit);
     }
 
@@ -196,11 +211,10 @@ public class SuperServiceTest {
         }
         
     }
-
-    @Test
-    public void getRecentSightingsGoldenPath() {
-        List<Sighting> recentSightings = superTempTest.getTenRecentSights();
-        
+    
+    public List<Sighting> getRecentSightings() {
+        List<Sighting> recentSightings = superHeroDaoTest.getTenRecentSights();
+        return recentSightings;
     }
 
 }
