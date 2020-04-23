@@ -11,18 +11,19 @@ CREATE TABLE Powers(
 
 CREATE TABLE Locations(
 	LocationId INT Primary Key NOT NULL auto_increment,
-	LocName varchar(40) NOT NULL,
-	LocDescription varchar(300),
+	LocationName varchar(40) NOT NULL,
+	LocationDesc varchar(300),
 	Address varchar(50),
-	LocCoord varchar(10)
+    latitude numeric(20, 10),
+	longitude numeric(20, 10)
 );
 
 CREATE TABLE Organizations(
 	OrgId INT Primary Key NOT NULL auto_increment,
 	OrgName varchar(30),
-	OrgDescriptiom varchar(300),
+	OrgDesc varchar(300),
 	Address varchar(50),
-	Phone varchar(10),
+	Phone varchar(50),
 	Email varchar(30)
 );
 
@@ -30,9 +31,7 @@ CREATE TABLE Heroes(
 	HeroId INT Primary Key NOT NULL auto_increment,
 	`Name` varchar(40) not null,
 	`Description` varchar(300) not null,
-    OrgId INT not null,
 	PowerId INT NOT NULL,
-    Foreign Key (OrgId) references Organizations(OrgId),
 	Foreign Key (PowerId) references Powers(PowerId)
 );
 
@@ -47,9 +46,10 @@ CREATE TABLE HeroOrg(
 );
 
 CREATE TABLE Sightings(
+	SightingId INT Primary KEY auto_increment,
 	HeroId INT NOT NULL,
     LocationId INT NOT NULL,
-    PRIMARY KEY pk_HeroSighting (HeroId, LocationId),
+    SightingDate Date NOT NULL,
     foreign key  (HeroId) references Heroes(HeroId),
     foreign key  (LocationId) references Locations(LocationId)
 );
