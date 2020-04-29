@@ -6,7 +6,6 @@
 package com.sg.superherosightings.controller;
 
 import com.sg.superherosightings.models.Location;
-import com.sg.superherosightings.models.Power;
 import com.sg.superherosightings.service.DuplicateInputException;
 import com.sg.superherosightings.service.SuperService;
 import java.util.ArrayList;

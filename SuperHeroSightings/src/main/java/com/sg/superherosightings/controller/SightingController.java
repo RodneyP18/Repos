@@ -5,7 +5,6 @@
  */
 package com.sg.superherosightings.controller;
 
-import static antlr.Utils.error;
 import com.sg.superherosightings.models.Hero;
 import com.sg.superherosightings.models.Location;
 import com.sg.superherosightings.models.Sighting;

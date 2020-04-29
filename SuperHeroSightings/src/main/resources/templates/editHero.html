@@ -44,15 +44,15 @@
                     <span class="h3">Edit Hero</span>
                 </div>
                 <div class="col-7 text-center m-3">
-                    <form action="/editHero" method="POST">
+                    <form action="/editHero" method="POST" th:object="${toEdit}">
                         <div class="form-group row">
                             <label for="toEdit" class="col-3 col-form-label">
                                 Hero Name</label>
                             <div class="col-9">
                                 <input type="text" name="name" id="name" class="form-control"
                                        th:value="${toEdit.name}" th:selected="${toEdit.name}"/>
-                                <div th:if="${#fields.hasErrors('toEdit.name')}">
-                                    <p th:each="error : ${#fields.errors('toEdit.name')}" class="alert alert-danger"
+                                <div th:if="${#fields.hasErrors('name')}">
+                                    <p th:each="error : ${#fields.errors('name')}" class="alert alert-danger"
                                        th:text="${error}"> Bad name </p>
                                 </div>
                             </div>
@@ -72,6 +72,10 @@
                             <div class="col-9">
                                 <input type="text" name="description" id="description" class="form-control"
                                        th:value="${toEdit.description}" />
+                                <div th:if="${#fields.hasErrors('description')}">
+                                    <p th:each="error : ${#fields.errors('description')}" class="alert alert-danger"
+                                       th:text="${error}"> Bad name </p>
+                                </div>
                             </div>
                         </div>
                         <div class="form-group row">
@@ -80,6 +84,10 @@
                             <div class="col-9">
                                 <div th:each="org:${orgs}">
                                     <input type="checkbox" th:checked="${toEdit.orgs.contains(org)}" th:text="${org.orgName}" th:value="${org.orgId}">
+                                    <div th:if="${#fields.hasErrors('orgs')}">
+                                        <p th:each="error : ${#fields.errors('orgs')}" class="alert alert-danger"
+                                           th:text="${error}"> Bad name </p>
+                                    </div>
                                 </div>
                             </div>
                         </div>

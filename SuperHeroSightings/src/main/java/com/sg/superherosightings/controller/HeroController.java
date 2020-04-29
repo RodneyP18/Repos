@@ -9,7 +9,6 @@ import com.sg.superherosightings.models.Hero;
 import com.sg.superherosightings.models.Organization;
 import com.sg.superherosightings.models.Power;
 import com.sg.superherosightings.service.DuplicateInputException;
-import com.sg.superherosightings.service.NullInputException;
 import com.sg.superherosightings.service.SuperService;
 import java.util.ArrayList;
 import java.util.List;
@@ -121,6 +120,7 @@ public class HeroController {
             List<Power> allPowers = service.getAllPowers();
             List<Organization> allOrgs = service.getAllOrganizations();
             model.addAttribute("errors", result.getAllErrors());
+            model.addAttribute("heroes", service.getAllHeroes());
             model.addAttribute("orgs", allOrgs);
             model.addAttribute("toEdit", toEdit);
             model.addAttribute("powers", allPowers);
