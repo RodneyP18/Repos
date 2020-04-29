@@ -21,19 +21,22 @@
             </div>
             <div class="row m-4 border border-dark">
                 <div class="col text-center m-3">
-                    <a href="heroes" class="btn btn-outline-primary btn-lg">Heroes</a>
+                    <a href="/index" class="btn btn-outline-primary btn-lg">Home</a>
                 </div>
                 <div class="col text-center m-3">
-                    <a href="powers" class="btn btn-outline-primary btn-lg">Powers</a>
+                    <a href="/heroes" class="btn btn-outline-primary btn-lg">Heroes</a>
                 </div>
                 <div class="col text-center m-3">
-                    <a href="sightings" class="btn btn-outline-primary btn-lg">Sightings</a>
+                    <a href="/powers" class="btn btn-outline-primary btn-lg">Powers</a>
                 </div>
                 <div class="col text-center m-3">
-                    <a href="locations" class="btn btn-outline-primary btn-lg">Locations</a>
+                    <a href="/sightings" class="btn btn-outline-primary btn-lg">Sightings</a>
                 </div>
                 <div class="col text-center m-3">
-                    <a href="organizations" class="btn btn-outline-primary btn-lg">Organizations</a>
+                    <a href="/locations" class="btn btn-outline-primary btn-lg">Locations</a>
+                </div>
+                <div class="col text-center m-3">
+                    <a href="/organizations" class="btn btn-outline-primary btn-lg">Organizations</a>
                 </div>
             </div>
             <div class="row m-4 border border-dark">
@@ -60,6 +63,11 @@
                             <div class="col-9">
                                 <input type="text" name="orgDesc" id="orgDesc" class="form-control"
                                        th:value="${toEdit.orgDesc}" />
+                                <div th:if="${#fields.hasErrors('toEdit.orgDesc')}">
+                                    <p th:each="error : ${#fields.errors('toEdit.orgDesc')}"
+                                       class="alert alert-danger" th:text="${error}">
+                                        Bad description</p>
+                                </div>
                             </div>
                         </div>
                         <div class="form-group row">
@@ -68,6 +76,11 @@
                             <div class="col-9">
                                 <input type="text" name="address" id="address" class="form-control"
                                        th:value="${toEdit.address}" />
+                                <div th:if="${#fields.hasErrors('toEdit.address')}">
+                                    <p th:each="error : ${#fields.errors('toEdit.address')}"
+                                       class="alert alert-danger" th:text="${error}">
+                                        Bad address</p>
+                                </div>
                             </div>
                         </div>
                         <div class="form-group row">
@@ -76,14 +89,43 @@
                             <div class="col-9">
                                 <input type="text" name="phone" id="phone" class="form-control"
                                        th:value="${toEdit.phone}" />
+                                <div th:if="${#fields.hasErrors('toEdit.phone')}">
+                                    <p th:each="error : ${#fields.errors('toEdit.phone')}"
+                                       class="alert alert-danger" th:text="${error}">
+                                        Bad Phone Number</p>
+                                </div>
                             </div>
+
                         </div>
                         <div class="form-group row">
                             <label for="" class="col-3 col-form-label">
-                               Email</label>
+                                Email</label>
                             <div class="col-9">
                                 <input type="text" name="email" id="email" class="form-control"
                                        th:value="${toEdit.email}" />
+                                <div th:if="${#fields.hasErrors('toEdit.email')}">
+                                    <p th:each="error : ${#fields.errors('toEdit.email')}"
+                                       class="alert alert-danger" th:text="${error}">
+                                        Bad email</p>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="form-group row">
+                            <label for="members" class="col-3 col-form-label">Heroes</label>
+                            <div class="col-9">
+                                <select multiple id="heroes" name="members" class="form-control">
+                                    <option th:each="hero : ${members}" 
+                                            th:value="${hero.heroId}" 
+                                            th:text="${hero.name}"
+                                            th:selected="${toEdit.members.contains(hero)}">
+                                        Hero Name</option>
+                                </select>
+                                <div th:if="${#fields.hasErrors('toEdit.members')}">
+                                    <p th:each="error : ${#fields.errors('toEdit.members')}" 
+                                       class="alert alert-danger" th:text="${error}"> 
+                                        Bad Hero </p>
+                                </div>
                             </div>
                         </div>
                         <input type="hidden" name="orgId" th:value="${toEdit.orgId}" />

@@ -12,6 +12,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
 
 /**
  *
@@ -21,11 +22,16 @@ import javax.persistence.Table;
 @Table (name = "powers")
 public class Power {
     
+    public Power(){
+        
+    }
+    
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     int powerId;
     
     @Column(nullable = false)
+    @NotBlank(message = "Power name must not be empty.")
     String superPower;
 
     @Override

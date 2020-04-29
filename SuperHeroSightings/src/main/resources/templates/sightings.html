@@ -40,7 +40,11 @@
                 </div>
             </div>
             <div class="row m-4 border border-dark">
-
+                <div class="col-12 m-1 text-center" 
+                     th:if="${!errors.isEmpty()}">
+                    <p class="alert alert-danger" th:each="error : ${errors}" 
+                       th:text="${error.defaultMessage}">Error message</p>
+                </div>
                 <div class="col-3 text-center m-3">
                     <span class="h3">Add Sighting</span>
                 </div>
@@ -51,7 +55,8 @@
                                 Hero Sighted</label>
                             <div class="col-9">
                                 <select name="superHero.heroId" class="form-control">
-                                    <option th:each="hero:${heroes}" th:value="${hero.heroId}" th:text="${hero.name}">
+                                    <option th:each="hero:${heroes}" th:value="${hero.heroId}" th:selected="${sighting.superHero.heroId == hero.heroId}"  th:text="${hero.name}">
+
                                 </select>
                             </div>
                         </div>
@@ -60,7 +65,8 @@
                                 Location</label>
                             <div class="col-9">
                                 <select name="heroLocation.locationId" class="form-control">
-                                    <option th:each="location:${locations}" th:value="${location.locationId}" th:text="${location.locationName}">
+                                    <option th:each="location:${locations}" th:value="${location.locationId}" th:text="${location.locationName}"
+                                            th:selected="${sighting.heroLocation.locationId == location.locationId}">
                                 </select>
                             </div>
                         </div>
@@ -68,7 +74,7 @@
                             <label for="sightingDate" class="col-3 col-form-label">
                                 Date Sighted</label>
                             <div class="col-9">
-                                <input class="form-control" id="date" name="dateToParse" placeholder="MM/DD/YYY" type="text"/>
+                                <input class="form-control" id="date" name="dateToParse" placeholder="MM/DD/YYYY" type="text"/>
                             </div>
                         </div>
                         <button type="submit" class="btn btn-primary">Add Sighting</button>
@@ -92,7 +98,7 @@
                                     <td th:text="${sighting.sightingId}">Sighting Id</td>
                                     <td th:text="${sighting.superHero.name}">Hero</td>
                                     <td th:text="${sighting.heroLocation.locationName}">Location</td>
-                                    <td th:text="${sighting.sightingDate}">Date Sighted</td>
+                                    <td th:text="${#temporals.format(sighting.sightingDate, 'MM/dd/yyyy')}">Date Sighted</td>
                                     <td><a href="#" th:href="${'/editSighting/' + sighting.sightingId}">Edit</a></td>
                                     <td><a href="#" th:href="${'/deleteSighting/' + sighting.sightingId}">Delete</a></td>
                                 </tr>

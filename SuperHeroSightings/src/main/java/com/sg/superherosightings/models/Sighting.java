@@ -6,19 +6,18 @@
 package com.sg.superherosightings.models;
 
 import java.time.LocalDate;
-import java.util.List;
 import java.util.Objects;
-import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Past;
+import javax.validation.constraints.PastOrPresent;
 
 /**
  *
@@ -27,6 +26,12 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "sightings")
 public class Sighting {
+
+    public Sighting() {
+
+        superHero = new Hero();
+        heroLocation = new Location();
+    }
 
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
@@ -41,6 +46,7 @@ public class Sighting {
     private Location heroLocation;
 
     @Column(nullable = false)
+    @NotNull(message = "Please enter a vaild date.")
     private LocalDate sightingDate;
 
     @Override
@@ -80,7 +86,6 @@ public class Sighting {
         return true;
     }
 
-    
     /**
      * @return the sightingId
      */
@@ -137,5 +142,4 @@ public class Sighting {
         this.sightingDate = sightingDate;
     }
 
-    
 }

@@ -26,30 +26,30 @@ public class HeroRepInMem implements HeroRep {
 
     public HeroRepInMem() {
         
-        Power powerOne = new Power();
-        powerOne.setPowerId(1);
-        powerOne.setSuperPower("Flying");
-        
-        Power powerTwo = new Power();
-        powerTwo.setPowerId(2);
-        powerTwo.setSuperPower("Speed");
-
-        Hero heroOne = new Hero();
-        heroOne.setHeroId(1);
-        heroOne.setName("Buddy");
-        heroOne.setSuperPower(powerOne);
-        heroOne.setDescription("Cool");
-        heroOne.setOrgs(orgs);
-
-        Hero heroTwo = new Hero();
-        heroTwo.setHeroId(1);
-        heroTwo.setName("Rodney");
-        heroTwo.setSuperPower(powerTwo);
-        heroTwo.setDescription("Uncool");
-        heroTwo.setOrgs(orgs);
-        
-        allHeroes.add(heroOne);
-        allHeroes.add(heroTwo);
+//        Power powerOne = new Power();
+//        powerOne.setPowerId(1);
+//        powerOne.setSuperPower("Flying");
+//        
+//        Power powerTwo = new Power();
+//        powerTwo.setPowerId(2);
+//        powerTwo.setSuperPower("Speed");
+//
+//        Hero heroOne = new Hero();
+//        heroOne.setHeroId(1);
+//        heroOne.setName("Buddy");
+//        heroOne.setSuperPower(powerOne);
+//        heroOne.setDescription("Cool");
+//        heroOne.setOrgs(orgs);
+//
+//        Hero heroTwo = new Hero();
+//        heroTwo.setHeroId(1);
+//        heroTwo.setName("Rodney");
+//        heroTwo.setSuperPower(powerTwo);
+//        heroTwo.setDescription("Uncool");
+//        heroTwo.setOrgs(orgs);
+//        
+//        allHeroes.add(heroOne);
+//        allHeroes.add(heroTwo);
        
     }
     

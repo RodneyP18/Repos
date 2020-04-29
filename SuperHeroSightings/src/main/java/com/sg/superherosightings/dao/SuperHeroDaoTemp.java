@@ -18,6 +18,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  *
@@ -31,12 +32,12 @@ public class SuperHeroDaoTemp implements SuperHeroDao {
 
     @Override
     public List<Sighting> getTenRecentSights() {
-        
-        List<Sighting> recentSightings = template.query("SELECt * FROM Sightings s INNER JOIN Heroes h ON h.heroId = s.heroId\n" +
-        "INNER JOIN Locations l ON l.locationId = s.locationId ORDER BY SightingDate DESC LIMIT 0, 10", new SightingMapper());
+
+        List<Sighting> recentSightings = template.query("SELECt * FROM Sightings s INNER JOIN Heroes h ON h.heroId = s.heroId\n"
+                + "INNER JOIN Locations l ON l.locationId = s.locationId ORDER BY SightingDate DESC LIMIT 0, 10", new SightingMapper());
         return recentSightings;
     }
-    
+
     private static final class SightingMapper implements RowMapper<Sighting> {
 
         @Override
@@ -54,4 +55,45 @@ public class SuperHeroDaoTemp implements SuperHeroDao {
         }
     }
     
+    @Override
+    @Transactional
+    public void deleteHero(Integer id) {
+        String DELETE_SIGHTING = "DELETE FROM Sightings WHERE heroId = ?";
+        template.update(DELETE_SIGHTING, id);
+        
+        String DELETE_ORG = "DELETE FROM HeroOrg WHERE heroId = ?";
+        template.update(DELETE_ORG, id);
+        
+        String DELETE_HERO = "DELETE FROM Heroes WHERE heroId = ?";
+        template.update(DELETE_HERO, id);
+    }
+    
+    @Override
+    @Transactional
+    public void deletePower(Integer id){
+        String DELETE_SIGHTING = "DELETE s.* FROM Sightings s JOIN Heroes h ON s.heroId = h.heroId WHERE powerId = ?";
+        template.update(DELETE_SIGHTING, id);
+        
+        String DELETE_ORG = "DELETE ho.* FROM HeroOrg ho JOIN Heroes h ON h.heroId = ho.heroId WHERE powerId = ?";
+        template.update(DELETE_ORG, id);
+        
+        String DELETE_HERO = "DELETE FROM Heroes WHERE powerId = ?";
+        template.update(DELETE_HERO, id);
+        
+        String DELETE_POWER = "DELETE FROM Powers WHERE powerId = ?";
+        template.update(DELETE_POWER, id);
+        
+    }
+    
+    @Override
+    @Transactional
+    public void deleteLocation(Integer id){
+        String DELETE_SIGHTING = "DELETE FROM Sightings WHERE locationId = ?";
+        template.update(DELETE_SIGHTING, id);
+        
+        String DELETE_LOCATION = "DELETE FROM Locations WHERE locationId = ?";
+        template.update(DELETE_LOCATION, id);
+        
+    }
+
 }

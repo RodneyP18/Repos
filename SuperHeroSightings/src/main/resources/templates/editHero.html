@@ -21,19 +21,22 @@
             </div>
             <div class="row m-4 border border-dark">
                 <div class="col text-center m-3">
-                    <a href="heroes" class="btn btn-outline-primary btn-lg">Heroes</a>
+                    <a href="/index" class="btn btn-outline-primary btn-lg">Home</a>
                 </div>
                 <div class="col text-center m-3">
-                    <a href="powers" class="btn btn-outline-primary btn-lg">Powers</a>
+                    <a href="/heroes" class="btn btn-outline-primary btn-lg">Heroes</a>
                 </div>
                 <div class="col text-center m-3">
-                    <a href="sightings" class="btn btn-outline-primary btn-lg">Sightings</a>
+                    <a href="/powers" class="btn btn-outline-primary btn-lg">Powers</a>
                 </div>
                 <div class="col text-center m-3">
-                    <a href="locations" class="btn btn-outline-primary btn-lg">Locations</a>
+                    <a href="/sightings" class="btn btn-outline-primary btn-lg">Sightings</a>
                 </div>
                 <div class="col text-center m-3">
-                    <a href="organizations" class="btn btn-outline-primary btn-lg">Organizations</a>
+                    <a href="/locations" class="btn btn-outline-primary btn-lg">Locations</a>
+                </div>
+                <div class="col text-center m-3">
+                    <a href="/organizations" class="btn btn-outline-primary btn-lg">Organizations</a>
                 </div>
             </div>
             <div class="row m-4 border border-dark">
@@ -47,7 +50,7 @@
                                 Hero Name</label>
                             <div class="col-9">
                                 <input type="text" name="name" id="name" class="form-control"
-                                       th:value="${toEdit.name}" />
+                                       th:value="${toEdit.name}" th:selected="${toEdit.name}"/>
                                 <div th:if="${#fields.hasErrors('toEdit.name')}">
                                     <p th:each="error : ${#fields.errors('toEdit.name')}" class="alert alert-danger"
                                        th:text="${error}"> Bad name </p>
@@ -71,14 +74,15 @@
                                        th:value="${toEdit.description}" />
                             </div>
                         </div>
-                        <!--                        <div class="form-group row">
-                                                    <label for="org" class="col-3 col-form-label">
-                                                        Description</label>
-                                                    <div class="col-9">
-                                                        <input type="text" name="org" id="org" class="form-control"
-                                                               th:value="${toEdit.orgs}" />
-                                                    </div>
-                                                </div>-->
+                        <div class="form-group row">
+                            <label for="org" class="col-3 col-form-label">
+                                Organizations</label>
+                            <div class="col-9">
+                                <div th:each="org:${orgs}">
+                                    <input type="checkbox" th:checked="${toEdit.orgs.contains(org)}" th:text="${org.orgName}" th:value="${org.orgId}">
+                                </div>
+                            </div>
+                        </div>
                         <input type="hidden" name="heroId" th:value="${toEdit.heroId}" />
                         <button type="submit" class="btn btn-primary">Update Hero</button>
                     </form>

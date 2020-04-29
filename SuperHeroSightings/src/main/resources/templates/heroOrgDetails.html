@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
     <head> 
@@ -39,30 +39,67 @@
                     <a href="/organizations" class="btn btn-outline-primary btn-lg">Organizations</a>
                 </div>
             </div>
-            <div class="row m-4 border border-dark">
-                <div class="col-3 text-center m-3">
-                    <span class="h3">Edit Power</span>
+
+        </div> 
+        <div class="row m-4 border border-dark">
+            <div class="col text-center m-3">
+                <div class="col-6 text-center m-3">
+                    <span class="h3">Hero</span>
                 </div>
-                <div class="col-7 text-center m-3">
-                    <form action="/editPower" method="POST">
-                        <div class="form-group row">
-                            <label for="toEdit" class="col-3 col-form-label">
-                                Power Name</label>
-                            <div class="col-9">
-                                <input type="text" name="superPower" id="name" class="form-control"
-                                       th:value="${toEdit.superPower}" />
-                                <div th:if="${#fields.hasErrors('toEdit.superPower')}">
-                                    <p th:each="error : ${#fields.errors('toEdit.superPower')}" class="alert alert-danger"
-                                       th:text="${error}"> Bad name </p>
-                                </div>
-                            </div>
-                        </div>
-                        <input type="hidden" name="powerId" th:value="${toEdit.powerId}" />
-                        <button type="submit" class="btn btn-primary">Update Power</button>
-                    </form>
-                </div> 
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Power</th>
+                            <th>Description</th>
+                            <th>Edit</th>
+                            <th>Delete</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td th:text="${hero.heroId}">Hero ID</td>
+                            <td th:text="${hero.name}">Name</td>
+                            <td th:text="${hero.superPower.superPower}">Super Power</td>
+                            <td th:text="${hero.description}">Description</td>
+                            <td><a href="#" th:href="${'/editHero/' + hero.heroId}">Edit</a></td>
+                            <td><a href="#" th:href="${'/deleteHero/' + hero.heroId}">Delete</a></td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
+        <div class="col text-center m-3">
+            <div class="col-6 text-center m-3">
+                <span class="h3">Organizations</span>
+            </div>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Description</th>
+                        <th>Address</th>
+                        <th>Phone</th>
+                        <th>Email</th>
+                    </tr>
+                </thead>              
+                <tbody>
+                    <tr th:each="org : ${orgs}">
+                        <td th:text="${org.orgId}">Org. ID</td>
+                        <td th:text="${org.orgName}">Name</td>
+                        <td th:text="${org.orgDesc}">Description</td>
+                        <td th:text="${org.address}">Address</td>
+                        <td th:text="${org.phone}">Phone</td>
+                        <td th:text="${org.email}">Email</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+
+
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
                 integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
         crossorigin="anonymous"></script>

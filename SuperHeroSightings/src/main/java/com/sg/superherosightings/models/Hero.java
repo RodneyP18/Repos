@@ -5,6 +5,7 @@
  */
 package com.sg.superherosightings.models;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import javax.persistence.Column;
@@ -16,6 +17,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 /**
  *
@@ -24,6 +27,11 @@ import javax.persistence.Table;
 @Entity
 @Table (name = "heroes")
 public class Hero {
+    
+    public Hero(){
+        superPower = new Power();
+        orgs = new ArrayList<>();
+    }
 
     
     
@@ -32,13 +40,16 @@ public class Hero {
     private int heroId;
     
     @Column(nullable = false)
+    @NotBlank(message = "Name must not be empty.")
     private String name;
     
     @Column(nullable = false)
+    @NotBlank(message = "Description must not be empty.")
     private String description;
     
     @ManyToOne
     @JoinColumn( name = "powerId", nullable = false)
+    @NotNull(message = "Description must not be empty.")
     private Power superPower;
     
     @ManyToMany(mappedBy = "members")

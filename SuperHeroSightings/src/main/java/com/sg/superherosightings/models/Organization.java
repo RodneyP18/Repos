@@ -16,6 +16,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 
 /**
@@ -31,36 +33,41 @@ public class Organization {
     private int orgId;
     
     @Column(nullable = false)
+    @NotBlank(message = "Organization name must not be empty.")
     private String orgName;
     
     @Column(nullable = false)
+    @NotBlank(message = "Description must not be empty.")
     private String orgDesc;
     
     @Column(nullable = false)
+    @NotBlank(message = "Address must not be empty.")
     private String address;
     
     @Column(nullable = false)
+    @NotBlank(message = "Phone number must not be empty.")
     private String phone;
     
     @Column(nullable = false)
+    @NotBlank(message = "Email must not be empty.")
     private String email;
     
     @ManyToMany
     @JoinTable(name = "heroOrg",
     joinColumns = {@JoinColumn(name = "orgId")},
     inverseJoinColumns = {@JoinColumn(name = "heroId")})
+    @NotNull(message = "Must add heroes.")
     private List<Hero> members;
-    
+
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 37 * hash + this.orgId;
-        hash = 37 * hash + Objects.hashCode(this.orgName);
-        hash = 37 * hash + Objects.hashCode(this.orgDesc);
-        hash = 37 * hash + Objects.hashCode(this.address);
-        hash = 37 * hash + Objects.hashCode(this.phone);
-        hash = 37 * hash + Objects.hashCode(this.email);
-        hash = 37 * hash + Objects.hashCode(this.members);
+        hash = 17 * hash + this.orgId;
+        hash = 17 * hash + Objects.hashCode(this.orgName);
+        hash = 17 * hash + Objects.hashCode(this.orgDesc);
+        hash = 17 * hash + Objects.hashCode(this.address);
+        hash = 17 * hash + Objects.hashCode(this.phone);
+        hash = 17 * hash + Objects.hashCode(this.email);
         return hash;
     }
 
@@ -94,12 +101,11 @@ public class Organization {
         if (!Objects.equals(this.email, other.email)) {
             return false;
         }
-        if (!Objects.equals(this.members, other.members)) {
-            return false;
-        }
         return true;
     }
 
+   
+    
     /**
      * @return the orgId
      */
@@ -115,17 +121,17 @@ public class Organization {
     }
 
     /**
-     * @return the name
+     * @return the orgName
      */
     public String getOrgName() {
         return orgName;
     }
 
     /**
-     * @param name the name to set
+     * @param orgName the orgName to set
      */
-    public void setOrgName(String name) {
-        this.orgName = name;
+    public void setOrgName(String orgName) {
+        this.orgName = orgName;
     }
 
     /**
@@ -197,6 +203,7 @@ public class Organization {
     public void setMembers(List<Hero> members) {
         this.members = members;
     }
-
+    
+   
     
 }

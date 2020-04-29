@@ -40,7 +40,11 @@
                 </div>
             </div>
             <div class="row m-4 border border-dark">
-
+                <div class="col-12 m-1 text-center" 
+                     th:if="${!errors.isEmpty()}">
+                    <p class="alert alert-danger" th:each="error : ${errors}" 
+                       th:text="${error.defaultMessage}">Error message</p>
+                </div>
                 <div class="col-3 text-center m-3">
                     <span class="h3">Add Organization</span>
                 </div>
@@ -81,6 +85,16 @@
                                 <input type="text" name="email" id="org" class="form-control"/>
                             </div>
                         </div>
+                        <div class="form-group row">
+                            <label for="heroes" class="col-3 col-form-label">
+                                Heroes</label>
+                            <div class="col-9">
+                                <select multiple id="students" name="members" class="form-control">
+                                    <option th:each="hero : ${heroes}" th:value="${hero.heroId}" th:text="${hero.name}">
+                                        Heroes</option>
+                                </select>
+                            </div>
+                        </div>
                         <button type="submit" class="btn btn-primary">Add Organization</button>
                     </form>
                 </div>
@@ -102,7 +116,7 @@
                             <tbody>
                                 <tr th:each="org : ${orgs}">
                                     <td th:text="${org.orgId}">Org. ID</td>
-                                    <td th:text="${org.orgName}">Organization</td>
+                                    <td><a th:href="${'/orgDetails/'+ org.orgId}" th:text="${org.orgName}"></a></td>
                                     <td th:text="${org.orgDesc}">Description</td>
                                     <td th:text="${org.address}">Address</td>
                                     <td th:text="${org.phone}">Phone</td>

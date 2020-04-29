@@ -69,152 +69,152 @@ public class SuperServiceTest {
         heroRepTest.save(newHero);
     }
 
-    @Test
-    public void editHeroGoldenPath() {
-        Optional<Hero> toEdit = heroRepTest.findById(1);
-        
-        heroRepTest.save(toEdit);
-    }
-
-    @Test
-    public void getAllHeroesGoldenPath() {
-        List<Hero> allHeroes = heroRepTest.findAll();
-        
-    }
-
-    @Test
-    public void getPowerByIdGoldenPath() {
-        Optional<Power> powers = powerRepTest.findById(1);
-        
-        
-    }
-
-    @Test
-    public void deletePowerGoldenPath() {
-        powerRepTest.deleteById(1);
-    }
-
-    @Test
-    public void addPowerGoldenPath() {
-        Power newPower = new Power();
-        powerRepTest.save(newPower);
-    }
-
-    @Test
-    public void getAllPowersGoldenPath() {
-        List<Power> allPowers = powerRepTest.findAll();
-        
-    }
-
-    @Test
-    public void editPowerGoldenPath() {
-        Optional<Power> toEdit = powerRepTest.findById(1);
-        
-        powerRepTest.save(toEdit);
-    }
-
-    @Test
-    public void getAllSightingsGoldenPath() {
-        List<Sighting> allSightings = sightRepTest.findAll();
-        
-    }
-
-    @Test
-    public void addSightingGoldenPath() {
-        sightRepTest.save(newSighting);
-    }
-
-    @Test
-    public void deleteSightingGoldenPath() {
-        sightRepTest.deleteById(1);
-    }
-
-    @Test
-    public void getSightingByIdGoldenPath() {
-        Optional<Sighting> sightings = sightRepTest.findById(1);
-        
-        
-    }
-
-    @Test
-    public void editSightingGoldenPath() {
-        Optional<Sighting> toEdit = sightRepTest.findById(1);
-        
-        sightRepTest.save(toEdit);
-    }
-
-    @Test
-    public void addOrgGoldenPath() {
-        orgRepTest.save(newOrg);
-    }
-
-    @Test
-    public void deleteOrgGoldenPath() {
-        orgRepTest.deleteById(1);
-    }
-
-    @Test
-    public void getAllOrganizationsGoldenPath() {
-        List<Organization> allOrganizations = orgRepTest.findAll();
-        
-    }
-
-    @Test
-    public void getOrgByIdGoldenPath() {
-        Optional<Organization> organizations = orgRepTest.findById(1);
-        
-        
-    }
-
-    @Test
-    public void editOrgGoldenPath() {
-        Optional<Organization> toEdit = orgRepTest.findById(1);
-        
-        orgRepTest.save(toEdit);
-    }
-
-    @Test
-    public void getAllLocationsGoldenPath() {
-        List<Location> allLocations = locRepTest.findAll();
-        
-    }
-
-    @Test
-    public void addLocationGoldenPath() {
-        locRepTest.save(newLocation);
-    }
-
-    @Test
-    public void deleteLocationGoldenPath() {
-        locRepTest.deleteById(1);
-    }
-
-    @Test
-    public void getLocationByIdGoldenPath() {
-        Optional<Location> locations = locRepTest.findById(1);
-        
-        
-    }
-
-    @Test
-    public void editLocationGoldenPath() {
-        Optional<Location> toEdit = locRepTest.findById(1);
-        
-        locRepTest.save(toEdit);
-    }
-
-    @Test
-    public void getMatchingOrgsGoldenPath() {
-        List<Organization> matchingOrgs = new ArrayList<>();
-        for (String orgId : orgIds) {
-            matchingOrgs.add(orgRepTest.getOne(Integer.parseInt(orgId)));
-        }
-        
-    }
-    
-    public List<Sighting> getRecentSightings() {
-        List<Sighting> recentSightings = superHeroDaoTest.getTenRecentSights();
-        return recentSightings;
-    }
+//    @Test
+//    public void editHeroGoldenPath() {
+//        Optional<Hero> toEdit = heroRepTest.findById(1);
+//        
+//        heroRepTest.save(toEdit);
+//    }
+//
+//    @Test
+//    public void getAllHeroesGoldenPath() {
+//        List<Hero> allHeroes = heroRepTest.findAll();
+//        
+//    }
+//
+//    @Test
+//    public void getPowerByIdGoldenPath() {
+//        Optional<Power> powers = powerRepTest.findById(1);
+//        
+//        
+//    }
+//
+//    @Test
+//    public void deletePowerGoldenPath() {
+//        powerRepTest.deleteById(1);
+//    }
+//
+//    @Test
+//    public void addPowerGoldenPath() {
+//        Power newPower = new Power();
+//        powerRepTest.save(newPower);
+//    }
+//
+//    @Test
+//    public void getAllPowersGoldenPath() {
+//        List<Power> allPowers = powerRepTest.findAll();
+//        
+//    }
+//
+//    @Test
+//    public void editPowerGoldenPath() {
+//        Optional<Power> toEdit = powerRepTest.findById(1);
+//        
+//        powerRepTest.save(toEdit);
+//    }
+//
+//    @Test
+//    public void getAllSightingsGoldenPath() {
+//        List<Sighting> allSightings = sightRepTest.findAll();
+//        
+//    }
+//
+//    @Test
+//    public void addSightingGoldenPath() {
+//        sightRepTest.save(newSighting);
+//    }
+//
+//    @Test
+//    public void deleteSightingGoldenPath() {
+//        sightRepTest.deleteById(1);
+//    }
+//
+//    @Test
+//    public void getSightingByIdGoldenPath() {
+//        Optional<Sighting> sightings = sightRepTest.findById(1);
+//        
+//        
+//    }
+//
+//    @Test
+//    public void editSightingGoldenPath() {
+//        Optional<Sighting> toEdit = sightRepTest.findById(1);
+//        
+//        sightRepTest.save(toEdit);
+//    }
+//
+//    @Test
+//    public void addOrgGoldenPath() {
+//        orgRepTest.save(newOrg);
+//    }
+//
+//    @Test
+//    public void deleteOrgGoldenPath() {
+//        orgRepTest.deleteById(1);
+//    }
+//
+//    @Test
+//    public void getAllOrganizationsGoldenPath() {
+//        List<Organization> allOrganizations = orgRepTest.findAll();
+//        
+//    }
+//
+//    @Test
+//    public void getOrgByIdGoldenPath() {
+//        Optional<Organization> organizations = orgRepTest.findById(1);
+//        
+//        
+//    }
+//
+//    @Test
+//    public void editOrgGoldenPath() {
+//        Optional<Organization> toEdit = orgRepTest.findById(1);
+//        
+//        orgRepTest.save(toEdit);
+//    }
+//
+//    @Test
+//    public void getAllLocationsGoldenPath() {
+//        List<Location> allLocations = locRepTest.findAll();
+//        
+//    }
+//
+//    @Test
+//    public void addLocationGoldenPath() {
+//        locRepTest.save(newLocation);
+//    }
+//
+//    @Test
+//    public void deleteLocationGoldenPath() {
+//        locRepTest.deleteById(1);
+//    }
+//
+//    @Test
+//    public void getLocationByIdGoldenPath() {
+//        Optional<Location> locations = locRepTest.findById(1);
+//        
+//        
+//    }
+//
+//    @Test
+//    public void editLocationGoldenPath() {
+//        Optional<Location> toEdit = locRepTest.findById(1);
+//        
+//        locRepTest.save(toEdit);
+//    }
+//
+//    @Test
+//    public void getMatchingOrgsGoldenPath() {
+//        List<Organization> matchingOrgs = new ArrayList<>();
+//        for (String orgId : orgIds) {
+//            matchingOrgs.add(orgRepTest.getOne(Integer.parseInt(orgId)));
+//        }
+//        
+//    }
+//    
+//    public List<Sighting> getRecentSightings() {
+//        List<Sighting> recentSightings = superHeroDaoTest.getTenRecentSights();
+//        return recentSightings;
+//    }
 
 }

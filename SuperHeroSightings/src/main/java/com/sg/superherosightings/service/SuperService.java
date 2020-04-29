@@ -16,6 +16,7 @@ import com.sg.superherosightings.repository.LocationRep;
 import com.sg.superherosightings.repository.OrganizationRep;
 import com.sg.superherosightings.repository.PowerRep;
 import com.sg.superherosightings.repository.SightingRep;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -43,7 +44,7 @@ public class SuperService {
 
     @Autowired
     SightingRep sightingRepo;
-    
+
     @Autowired
     SuperHeroDaoTemp superTemp;
 
@@ -55,14 +56,26 @@ public class SuperService {
     }
 
     public void deleteHero(Integer id) {
-        heroRepo.deleteById(id);
+        superTemp.deleteHero(id);
     }
 
-    public void addHero(Hero newHero) {
+    public void addHero(Hero newHero) throws DuplicateInputException {
+        List<Hero> allHeroes = heroRepo.findAll();
+        for (Hero hero : allHeroes){
+            if (newHero.getName().equals(hero.getName())){
+                throw new DuplicateInputException("Name already exists");
+            }
+        }
         heroRepo.save(newHero);
     }
-    
-    public void editHero(Hero toEdit) {
+
+    public void editHero(Hero toEdit) throws DuplicateInputException {
+        List<Hero> allHeroes = heroRepo.findAll();
+        for (Hero hero : allHeroes){
+            if (toEdit.getName().equals(hero.getName())){
+                throw new DuplicateInputException("Name already exists");
+            }
+        }
         heroRepo.save(toEdit);
     }
 
@@ -79,10 +92,16 @@ public class SuperService {
     }
 
     public void deletePower(Integer id) {
-        powerRepo.deleteById(id);
+        superTemp.deletePower(id);
     }
 
-    public void addPower(Power newPower) {
+    public void addPower(Power newPower) throws DuplicateInputException {
+        List<Power> allPowers = powerRepo.findAll();
+        for (Power power : allPowers){
+            if (newPower.getSuperPower().equals(power.getSuperPower())){
+                throw new DuplicateInputException("Super power already exists");
+            }
+        }
         powerRepo.save(newPower);
     }
 
@@ -91,7 +110,13 @@ public class SuperService {
         return allPowers;
     }
 
-    public void editPower(Power toEdit) {
+    public void editPower(Power toEdit) throws DuplicateInputException {
+        List<Power> allPowers = powerRepo.findAll();
+        for (Power power : allPowers){
+            if (toEdit.getSuperPower().equals(power.getSuperPower())){
+                throw new DuplicateInputException("Name already exists");
+            }
+        }
         powerRepo.save(toEdit);
     }
 
@@ -100,7 +125,10 @@ public class SuperService {
         return allSightings;
     }
 
-    public void addSighting(Sighting newSighting) {
+    public void addSighting(Sighting newSighting) throws InvalidInputException {
+        if(newSighting.getSightingDate().isAfter(LocalDate.now())){
+            throw new InvalidInputException("Please enter a valid date. Date selected is in the future.");
+        }
         sightingRepo.save(newSighting);
     }
 
@@ -119,9 +147,13 @@ public class SuperService {
         sightingRepo.save(toEdit);
     }
 
-    
-
-    public void addOrg(Organization newOrg) {
+    public void addOrg(Organization newOrg) throws DuplicateInputException {
+        List<Organization> allOrganizations = orgRepo.findAll();
+        for (Organization org : allOrganizations){
+            if (newOrg.getOrgName().equals(org.getOrgName())){
+                throw new DuplicateInputException("Name already exists");
+            }
+        }
         orgRepo.save(newOrg);
     }
 
@@ -141,7 +173,13 @@ public class SuperService {
         return toReturn;
     }
 
-    public void editOrg(Organization toEdit) {
+    public void editOrg(Organization toEdit) throws DuplicateInputException {
+         List<Organization> allOrganizations = orgRepo.findAll();
+        for (Organization org : allOrganizations){
+            if (toEdit.getOrgName().equals(org.getOrgName())){
+                throw new DuplicateInputException("Name already exists");
+            }
+        }
         orgRepo.save(toEdit);
     }
 
@@ -150,12 +188,18 @@ public class SuperService {
         return allLocations;
     }
 
-    public void addLocation(Location newLocation) {
+    public void addLocation(Location newLocation) throws DuplicateInputException {
+        List<Location> allLocations = locationRepo.findAll();
+        for (Location location : allLocations){
+            if (newLocation.getLocationName().equals(location.getLocationName())){
+                throw new DuplicateInputException("Name already exists");
+            }
+        }
         locationRepo.save(newLocation);
     }
 
     public void deleteLocation(Integer id) {
-        locationRepo.deleteById(id);
+        superTemp.deleteLocation(id);
     }
 
     public Location getLocationById(Integer id) {
@@ -165,15 +209,26 @@ public class SuperService {
         return toReturn;
     }
 
-    public void editLocation(Location toEdit) {
+    public void editLocation(Location toEdit) throws DuplicateInputException {
+        List<Location> allLocations = locationRepo.findAll();
+        for (Location location : allLocations){
+            if (toEdit.getLocationName().equals(location.getLocationName())){
+                throw new DuplicateInputException("Name already exists");
+            }
+        }
         locationRepo.save(toEdit);
     }
 
     public List<Organization> getMatchingOrgs(String[] orgIds) {
         List<Organization> matchingOrgs = new ArrayList<>();
-        for(String orgId : orgIds){
-            matchingOrgs.add(orgRepo.getOne(Integer.parseInt(orgId)));
+        
+        if (orgIds != null) {
+            for (String orgId : orgIds) {
+                matchingOrgs.add(orgRepo.getOne(Integer.parseInt(orgId)));
+            }
+ 
         }
+
         return matchingOrgs;
     }
 
@@ -181,6 +236,5 @@ public class SuperService {
         List<Sighting> recentSightings = superTemp.getTenRecentSights();
         return recentSightings;
     }
-    
-    
+
 }

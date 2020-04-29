@@ -32,13 +32,7 @@ public class SuperHeroDaoTempTest {
     public void getRecentSightingsGoldenPath() {
         List<Sighting> recentSightings = superTempTest.getTenRecentSights();
         
-        assertEquals();
-        assertEquals();
-        assertEquals();
-        assertEquals();
-        assertEquals();
-        assertEquals();
-        assertEquals();
+       
         
         
     }

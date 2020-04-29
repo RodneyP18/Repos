@@ -14,4 +14,10 @@ import java.util.List;
  */
 public interface SuperHeroDao {
     public List<Sighting> getTenRecentSights();
+    
+    public void deleteHero(Integer id);
+    
+    public void deletePower(Integer id);
+    
+    public void deleteLocation(Integer id);
 }

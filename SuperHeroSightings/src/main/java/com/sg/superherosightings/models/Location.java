@@ -13,6 +13,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.Digits;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import org.hibernate.validator.constraints.Range;
 
 /**
  *
@@ -27,18 +31,22 @@ public class Location {
     private int locationId;
     
     @Column(nullable = false)
+    @NotBlank(message = "Location name must not be empty.")
     private String locationName;
     
     @Column(nullable = false)
+    @NotBlank(message = "Description must not be empty.")
     private String locationDesc;
     
     @Column(nullable = false)
+    @NotBlank(message = "Address must not be empty.")
     private String address; 
     
     @Column(nullable = false)
     private BigDecimal latitude;
     
     @Column(nullable = false)
+    @NotNull(message = "Longitude must not be empty.")
     private BigDecimal longitude;
 
     @Override
