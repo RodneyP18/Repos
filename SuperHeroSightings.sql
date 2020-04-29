@@ -6,36 +6,34 @@ USE SuperHeroSightings;
 
 CREATE TABLE Powers(
 	PowerId INT Primary Key NOT NULL auto_increment,
-	SuperPower varchar(20)
+	SuperPower varchar(20) unique
 );
 
 CREATE TABLE Locations(
 	LocationId INT Primary Key NOT NULL auto_increment,
-	LocationName varchar(40) NOT NULL,
+	LocationName varchar(40) NOT NULL unique,
 	LocationDesc varchar(300),
-	Address varchar(50),
-    latitude numeric(20, 10),
-	longitude numeric(20, 10)
+	Address varchar(50) unique,
+    latitude numeric(20, 4),
+	longitude numeric(20, 4)
 );
 
 CREATE TABLE Organizations(
 	OrgId INT Primary Key NOT NULL auto_increment,
-	OrgName varchar(30),
-	OrgDesc varchar(300),
-	Address varchar(50),
-	Phone varchar(50),
-	Email varchar(30)
+	OrgName varchar(30) unique,
+	OrgDesc varchar(300) unique,
+	Address varchar(50) unique,
+	Phone varchar(50) unique,
+	Email varchar(30) unique
 );
 
 CREATE TABLE Heroes(
 	HeroId INT Primary Key NOT NULL auto_increment,
-	`Name` varchar(40) not null,
+	`Name` varchar(40) not null unique,
 	`Description` varchar(300) not null,
 	PowerId INT NOT NULL,
 	Foreign Key (PowerId) references Powers(PowerId)
 );
-
-
 
 CREATE TABLE HeroOrg(
 	HeroId INT NOT NULL,
