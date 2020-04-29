@@ -40,6 +40,10 @@
                 </div>
             </div>
             <div class="row m-4 border border-dark">
+                <div class="col-12 m-1 text-center">
+                    <p class="alert alert-danger" th:each="error : ${errors}" 
+                       th:text="${error.defaultMessage}">Error message</p>
+                </div>
                 <div class="col-3 text-center m-3">
                     <span class="h3">Edit Organization</span>
                 </div>
@@ -51,10 +55,7 @@
                             <div class="col-9">
                                 <input type="text" name="orgName" id="orgName" class="form-control"
                                        th:value="${toEdit.orgName}" />
-                                <div th:if="${#fields.hasErrors('toEdit.orgName')}">
-                                    <p th:each="error : ${#fields.errors('toEdit.orgName')}" class="alert alert-danger"
-                                       th:text="${error}"> Bad name </p>
-                                </div>
+
                             </div>
                         </div>
                         <div class="form-group row">
@@ -63,11 +64,7 @@
                             <div class="col-9">
                                 <input type="text" name="orgDesc" id="orgDesc" class="form-control"
                                        th:value="${toEdit.orgDesc}" />
-                                <div th:if="${#fields.hasErrors('toEdit.orgDesc')}">
-                                    <p th:each="error : ${#fields.errors('toEdit.orgDesc')}"
-                                       class="alert alert-danger" th:text="${error}">
-                                        Bad description</p>
-                                </div>
+
                             </div>
                         </div>
                         <div class="form-group row">
@@ -76,11 +73,7 @@
                             <div class="col-9">
                                 <input type="text" name="address" id="address" class="form-control"
                                        th:value="${toEdit.address}" />
-                                <div th:if="${#fields.hasErrors('toEdit.address')}">
-                                    <p th:each="error : ${#fields.errors('toEdit.address')}"
-                                       class="alert alert-danger" th:text="${error}">
-                                        Bad address</p>
-                                </div>
+
                             </div>
                         </div>
                         <div class="form-group row">
@@ -89,11 +82,7 @@
                             <div class="col-9">
                                 <input type="text" name="phone" id="phone" class="form-control"
                                        th:value="${toEdit.phone}" />
-                                <div th:if="${#fields.hasErrors('toEdit.phone')}">
-                                    <p th:each="error : ${#fields.errors('toEdit.phone')}"
-                                       class="alert alert-danger" th:text="${error}">
-                                        Bad Phone Number</p>
-                                </div>
+
                             </div>
 
                         </div>

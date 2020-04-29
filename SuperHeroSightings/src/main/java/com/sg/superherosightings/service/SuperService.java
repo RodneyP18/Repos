@@ -61,19 +61,22 @@ public class SuperService {
 
     public void addHero(Hero newHero) throws DuplicateInputException {
         List<Hero> allHeroes = heroRepo.findAll();
-        for (Hero hero : allHeroes){
-            if (newHero.getName().equals(hero.getName())){
+        for (Hero hero : allHeroes) {
+            if (newHero.getName().equals(hero.getName())) {
                 throw new DuplicateInputException("Name already exists");
             }
+
         }
         heroRepo.save(newHero);
     }
 
     public void editHero(Hero toEdit) throws DuplicateInputException {
         List<Hero> allHeroes = heroRepo.findAll();
-        for (Hero hero : allHeroes){
-            if (toEdit.getName().equals(hero.getName())){
-                throw new DuplicateInputException("Name already exists");
+        for (Hero hero : allHeroes) {
+            if (toEdit.getHeroId() != hero.getHeroId()) {
+                if (toEdit.getName().equals(hero.getName())) {
+                    throw new DuplicateInputException("Name already exists");
+                }
             }
         }
         heroRepo.save(toEdit);
@@ -97,8 +100,8 @@ public class SuperService {
 
     public void addPower(Power newPower) throws DuplicateInputException {
         List<Power> allPowers = powerRepo.findAll();
-        for (Power power : allPowers){
-            if (newPower.getSuperPower().equals(power.getSuperPower())){
+        for (Power power : allPowers) {
+            if (newPower.getSuperPower().equals(power.getSuperPower())) {
                 throw new DuplicateInputException("Super power already exists");
             }
         }
@@ -112,9 +115,11 @@ public class SuperService {
 
     public void editPower(Power toEdit) throws DuplicateInputException {
         List<Power> allPowers = powerRepo.findAll();
-        for (Power power : allPowers){
-            if (toEdit.getSuperPower().equals(power.getSuperPower())){
-                throw new DuplicateInputException("Name already exists");
+        for (Power power : allPowers) {
+            if (toEdit.getPowerId() != power.getPowerId()) {
+                if (toEdit.getSuperPower().equals(power.getSuperPower())) {
+                    throw new DuplicateInputException("Name already exists");
+                }
             }
         }
         powerRepo.save(toEdit);
@@ -126,7 +131,7 @@ public class SuperService {
     }
 
     public void addSighting(Sighting newSighting) throws InvalidInputException {
-        if(newSighting.getSightingDate().isAfter(LocalDate.now())){
+        if (newSighting.getSightingDate().isAfter(LocalDate.now())) {
             throw new InvalidInputException("Please enter a valid date. Date selected is in the future.");
         }
         sightingRepo.save(newSighting);
@@ -149,8 +154,8 @@ public class SuperService {
 
     public void addOrg(Organization newOrg) throws DuplicateInputException {
         List<Organization> allOrganizations = orgRepo.findAll();
-        for (Organization org : allOrganizations){
-            if (newOrg.getOrgName().equals(org.getOrgName())){
+        for (Organization org : allOrganizations) {
+            if (newOrg.getOrgName().equals(org.getOrgName())) {
                 throw new DuplicateInputException("Name already exists");
             }
         }
@@ -174,10 +179,12 @@ public class SuperService {
     }
 
     public void editOrg(Organization toEdit) throws DuplicateInputException {
-         List<Organization> allOrganizations = orgRepo.findAll();
-        for (Organization org : allOrganizations){
-            if (toEdit.getOrgName().equals(org.getOrgName())){
-                throw new DuplicateInputException("Name already exists");
+        List<Organization> allOrganizations = orgRepo.findAll();
+        for (Organization org : allOrganizations) {
+            if (toEdit.getOrgId() != org.getOrgId()) {
+                if (toEdit.getOrgName().equals(org.getOrgName())) {
+                    throw new DuplicateInputException("Name already exists");
+                }
             }
         }
         orgRepo.save(toEdit);
@@ -190,8 +197,8 @@ public class SuperService {
 
     public void addLocation(Location newLocation) throws DuplicateInputException {
         List<Location> allLocations = locationRepo.findAll();
-        for (Location location : allLocations){
-            if (newLocation.getLocationName().equals(location.getLocationName())){
+        for (Location location : allLocations) {
+            if (newLocation.getLocationName().equals(location.getLocationName())) {
                 throw new DuplicateInputException("Name already exists");
             }
         }
@@ -211,9 +218,11 @@ public class SuperService {
 
     public void editLocation(Location toEdit) throws DuplicateInputException {
         List<Location> allLocations = locationRepo.findAll();
-        for (Location location : allLocations){
-            if (toEdit.getLocationName().equals(location.getLocationName())){
-                throw new DuplicateInputException("Name already exists");
+        for (Location location : allLocations) {
+            if (toEdit.getLocationId() != location.getLocationId()) {
+                if (toEdit.getLocationName().equals(location.getLocationName())) {
+                    throw new DuplicateInputException("Name already exists");
+                }
             }
         }
         locationRepo.save(toEdit);
@@ -221,12 +230,12 @@ public class SuperService {
 
     public List<Organization> getMatchingOrgs(String[] orgIds) {
         List<Organization> matchingOrgs = new ArrayList<>();
-        
+
         if (orgIds != null) {
             for (String orgId : orgIds) {
                 matchingOrgs.add(orgRepo.getOne(Integer.parseInt(orgId)));
             }
- 
+
         }
 
         return matchingOrgs;

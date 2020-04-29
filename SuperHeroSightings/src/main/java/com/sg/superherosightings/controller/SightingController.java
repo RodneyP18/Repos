@@ -101,7 +101,7 @@ public class SightingController {
     }
 
     @PostMapping("/editSighting")
-    public String editSighting(@Valid Sighting toEdit, HttpServletRequest request, BindingResult result) {
+    public String editSighting(@Valid Sighting toEdit, BindingResult result, HttpServletRequest request) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy");
         LocalDate date = LocalDate.parse(request.getParameter("dateToParse"), formatter);
         toEdit.setSightingDate(date);
