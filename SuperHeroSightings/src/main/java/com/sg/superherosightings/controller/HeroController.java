@@ -70,6 +70,13 @@ public class HeroController {
         } catch (DuplicateInputException ex) {
             FieldError error = new FieldError("hero", "name", "Hero Name already selected.");
             result.addError(error);
+            List<Power> allPowers = service.getAllPowers();
+            List<Organization> allOrgs = service.getAllOrganizations();
+            model.addAttribute("errors", result.getAllErrors());
+            model.addAttribute("orgs", allOrgs);
+            model.addAttribute("heroes", service.getAllHeroes());
+            model.addAttribute("hero", newHero);
+            model.addAttribute("powers", allPowers);
             return "heroes";
         }
 
@@ -111,6 +118,12 @@ public class HeroController {
         } catch (DuplicateInputException ex) {
             FieldError error = new FieldError("hero", "name", "Hero Name already selected.");
             result.addError(error);
+            List<Power> allPowers = service.getAllPowers();
+            List<Organization> allOrgs = service.getAllOrganizations();
+            model.addAttribute("errors", result.getAllErrors());
+            model.addAttribute("orgs", allOrgs);
+            model.addAttribute("toEdit", toEdit);
+            model.addAttribute("powers", allPowers);
             return "editHero";
         }
         

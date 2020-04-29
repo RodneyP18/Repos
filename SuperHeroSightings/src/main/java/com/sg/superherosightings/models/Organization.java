@@ -5,6 +5,7 @@
  */
 package com.sg.superherosightings.models;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import javax.persistence.Column;
@@ -27,6 +28,10 @@ import javax.validation.constraints.NotNull;
 @Entity
 @Table (name = "organizations")
 public class Organization {
+    
+    public Organization(){
+        
+    }
     
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id

@@ -37,6 +37,7 @@ public class OrgController {
     public String displayOrgs(Model model) {
         List<Organization> allOrgs = service.getAllOrganizations();
         List<Hero> allHeroes = service.getAllHeroes();
+        model.addAttribute("organization", new Organization());
         model.addAttribute("heroes", allHeroes);
         model.addAttribute("errors", new ArrayList<>());
         model.addAttribute("orgs", allOrgs);
@@ -46,10 +47,13 @@ public class OrgController {
     @PostMapping("/addOrg")
     public String addOrg(@Valid Organization newOrg, BindingResult result, Model model) {
         if (result.hasErrors()) {
-            List<Organization> organizations = service.getAllOrganizations();
+            Organization org = new Organization();
+            List<Hero> allHeroes = service.getAllHeroes();
+            List<Organization> allOrgs = service.getAllOrganizations();
             model.addAttribute("errors", result.getAllErrors());
+            model.addAttribute("heroes", allHeroes);
             model.addAttribute("organization", newOrg);
-            model.addAttribute("organizations", organizations);
+            model.addAttribute("orgs", allOrgs);
 
             return "organizations";
         }
@@ -105,6 +109,10 @@ public class OrgController {
         } catch (DuplicateInputException ex) {
             FieldError error = new FieldError("organization", "orgName", "Name already exists.");
             result.addError(error);
+            model.addAttribute("errors", result.getAllErrors());
+            model.addAttribute("members", service.getAllHeroes());
+            model.addAttribute("toEdit", toEdit);
+            
             return "editOrg";
         }
         

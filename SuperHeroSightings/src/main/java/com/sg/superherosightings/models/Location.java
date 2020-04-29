@@ -26,6 +26,10 @@ import org.hibernate.validator.constraints.Range;
 @Table (name = "locations")
 public class Location {
     
+    public Location(){
+        
+    }
+    
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     private int locationId;
@@ -43,9 +47,12 @@ public class Location {
     private String address; 
     
     @Column(nullable = false)
+    @Range(min = -90, max = 90, message = "Latitude must be between -90 to 90")
+    @NotNull(message = "Latitude must not be empty.")
     private BigDecimal latitude;
     
     @Column(nullable = false)
+    @Range(min = -180, max = 180, message = "Longitude must be between -180 to 180")
     @NotNull(message = "Longitude must not be empty.")
     private BigDecimal longitude;
 

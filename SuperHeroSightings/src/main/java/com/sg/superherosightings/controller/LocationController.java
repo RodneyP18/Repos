@@ -35,6 +35,7 @@ public class LocationController {
     @GetMapping("/locations")
     public String displayLocations(Model model) {
         List<Location> allLocations = service.getAllLocations();
+        model.addAttribute("location", new Location());
         model.addAttribute("errors", new ArrayList<>());
         model.addAttribute("locations", allLocations);
         return "locations";
@@ -45,10 +46,9 @@ public class LocationController {
         if (result.hasErrors()) {
             List<Location> locations = service.getAllLocations();
             model.addAttribute("errors", result.getAllErrors());
-            model.addAttribute("teacher", newLocation);
-            model.addAttribute("teachers", locations);
-            
-            
+            model.addAttribute("location", newLocation);
+            model.addAttribute("locations", locations);
+
             return "locations";
         }
         try {
@@ -56,9 +56,13 @@ public class LocationController {
         } catch (DuplicateInputException ex) {
             FieldError error = new FieldError("location", "locationName", "Name already exists.");
             result.addError(error);
+            List<Location> locations = service.getAllLocations();
+            model.addAttribute("errors", result.getAllErrors());
+            model.addAttribute("location", newLocation);
+            model.addAttribute("locations", locations);
             return "locations";
         }
-        
+
         return "redirect:/locations";
     }
 
@@ -76,8 +80,12 @@ public class LocationController {
     }
 
     @PostMapping("/editLocation")
-    public String editLocation(@Valid Location toEdit, BindingResult result) {
+    public String editLocation(@Valid Location toEdit, BindingResult result, Model model) {
         if (result.hasErrors()) {
+            List<Location> allLocations = service.getAllLocations();
+            model.addAttribute("toEdit", toEdit);
+            model.addAttribute("errors", result.getAllErrors());
+            model.addAttribute("locations", allLocations);
             return "editLocation";
         }
         try {
@@ -85,9 +93,13 @@ public class LocationController {
         } catch (DuplicateInputException ex) {
             FieldError error = new FieldError("location", "locationName", "Name already exists.");
             result.addError(error);
+            List<Location> allLocations = service.getAllLocations();
+            model.addAttribute("toEdit", toEdit);
+            model.addAttribute("errors", result.getAllErrors());
+            model.addAttribute("locations", allLocations);
             return "editLocation";
         }
-        
+
         return "redirect:/locations";
     }
 }
