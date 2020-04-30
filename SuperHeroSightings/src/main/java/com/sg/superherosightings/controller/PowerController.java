@@ -56,6 +56,10 @@ public class PowerController {
         } catch (DuplicateInputException ex) {
             FieldError error = new FieldError("power", "superPower", "Name already exists.");
             result.addError(error);
+            List<Power> powers = service.getAllPowers();
+            model.addAttribute("errors", result.getAllErrors());
+            model.addAttribute("power", newPower);
+            model.addAttribute("powers", powers);
             return "powers";
         }
         
@@ -76,7 +80,7 @@ public class PowerController {
     }
 
     @PostMapping("/editPower")
-    public String editPower(@Valid Power toEdit, BindingResult result) {
+    public String editPower(@Valid Power toEdit, BindingResult result, Model model) {
         if (result.hasErrors()) {
             return "editPower";
         }
@@ -85,6 +89,10 @@ public class PowerController {
         } catch (DuplicateInputException ex) {
             FieldError error = new FieldError("power", "superPower", "Name already exists.");
             result.addError(error);
+            List<Power> powers = service.getAllPowers();
+            model.addAttribute("errors", result.getAllErrors());
+            model.addAttribute("toEdit", toEdit);
+            model.addAttribute("powers", powers);
             return "editPower";
         }
         
