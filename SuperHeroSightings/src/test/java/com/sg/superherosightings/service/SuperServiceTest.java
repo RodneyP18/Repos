@@ -69,6 +69,10 @@ public class SuperServiceTest {
         List<Hero> allHeroes = heroRepTest.findAll();
         
         assertEquals(1, allHeroes.size());
+        
+        Hero toGet = allHeroes.get(0);
+        
+        assertEquals(2, toGet.getHeroId());
     }
 
     @Test
@@ -83,6 +87,11 @@ public class SuperServiceTest {
         newHero.setSuperPower(newPower);
         
         heroRepTest.save(newHero);
+        Hero toGet = heroRepTest.findById(3).get();
+        
+        assertEquals("Joe", toGet.getName());
+        assertEquals("Way Cool", toGet.getDescription());
+        assertEquals("Invisibility", toGet.getSuperPower().getSuperPower());
     }
 
     @Test
@@ -101,7 +110,7 @@ public class SuperServiceTest {
         
         heroRepTest.save(toEdit);
         
-        Hero toTest = heroRepTest.findById(3).get();
+        Hero toTest = heroRepTest.findById(1).get();
         
         assertEquals("Billy", toTest.getName());
         assertEquals("Semi-Cool", toTest.getDescription());
@@ -148,6 +157,7 @@ public class SuperServiceTest {
     public void addPowerGoldenPath() {
         Power newPower = new Power();
         newPower.setSuperPower("Invisibility");
+        
         powerRepTest.save(newPower);
     }
 

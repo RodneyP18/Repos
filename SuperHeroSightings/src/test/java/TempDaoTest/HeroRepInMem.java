@@ -28,26 +28,26 @@ public class HeroRepInMem implements HeroRep {
     public HeroRepInMem() {
         List<Organization> orgListOne = new ArrayList<>();
         List<Organization> orgListTwo = new ArrayList<>();
-        
+
         Power powerOne = new Power();
         powerOne.setPowerId(1);
         powerOne.setSuperPower("Flying");
-        
+
         Power powerTwo = new Power();
         powerTwo.setPowerId(2);
         powerTwo.setSuperPower("Speed");
-        
+
         Organization orgOne = new Organization();
         orgOne.setOrgId(1);
         orgOne.setOrgName("SG");
-        
+
         Organization orgTwo = new Organization();
         orgTwo.setOrgId(2);
         orgTwo.setOrgName("SHS");
-        
+
         orgListOne.add(orgOne);
         orgListTwo.add(orgTwo);
-        
+
         Hero heroOne = new Hero();
         heroOne.setHeroId(1);
         heroOne.setName("Buddy");
@@ -61,19 +61,31 @@ public class HeroRepInMem implements HeroRep {
         heroTwo.setSuperPower(powerTwo);
         heroTwo.setDescription("Uncool");
         heroTwo.setOrgs(orgListTwo);
-        
+
         allHeroes.add(heroOne);
         allHeroes.add(heroTwo);
-       
+
     }
-    
-     @Override
+
+    @Override
     public <S extends Hero> S save(S toSave) {
+        int index = 0;
         
-        toSave.setHeroId(allHeroes.stream().mapToInt( a -> a.getHeroId() ).max().orElse(0) + 1);
-        
+        for (int i = 0; i < allHeroes.size(); i++) {
+            
+            Hero toGet = allHeroes.get(i);
+            
+            if (toSave.getHeroId() == toGet.getHeroId()) {
+               index = i;
+               allHeroes.set(index, toSave);
+               return toSave;
+            }
+        }
+       
+        toSave.setHeroId(allHeroes.stream().mapToInt(a -> a.getHeroId()).max().orElse(0) + 1);
+
         allHeroes.add(toSave);
-        
+
         return toSave;
     }
 
@@ -86,16 +98,11 @@ public class HeroRepInMem implements HeroRep {
     public List<Hero> findAll() {
         return allHeroes;
     }
-    
+
     @Override
     public void deleteById(Integer toDelete) {
-         allHeroes.removeIf(s -> s.getHeroId() == toDelete);
+        allHeroes.removeIf(s -> s.getHeroId() == toDelete);
     }
-    
-    
-    
-    
-    
 
     @Override
     public List<Hero> findAll(Sort arg0) {
