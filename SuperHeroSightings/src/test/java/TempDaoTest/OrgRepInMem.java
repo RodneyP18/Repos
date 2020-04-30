@@ -5,7 +5,9 @@
  */
 package TempDaoTest;
 
+import com.sg.superherosightings.models.Hero;
 import com.sg.superherosightings.models.Organization;
+import com.sg.superherosightings.models.Power;
 import com.sg.superherosightings.repository.OrganizationRep;
 import java.util.ArrayList;
 import java.util.List;
@@ -24,10 +26,52 @@ public class OrgRepInMem implements OrganizationRep{
     List<Organization> allOrgs = new ArrayList<>();
     
     public OrgRepInMem(){
+        List<Hero> heroListOne = new ArrayList<>();
+        List<Hero> heroListTwo = new ArrayList<>();
+        
+        Power powerOne = new Power();
+        powerOne.setPowerId(1);
+        powerOne.setSuperPower("Flying");
+        
+        Power powerTwo = new Power();
+        powerTwo.setPowerId(2);
+        powerTwo.setSuperPower("Speed");
+        
+        Hero heroOne = new Hero();
+        heroOne.setHeroId(1);
+        heroOne.setName("Buddy");
+        heroOne.setSuperPower(powerOne);
+        heroOne.setDescription("Cool");
+
+        Hero heroTwo = new Hero();
+        heroTwo.setHeroId(2);
+        heroTwo.setName("Rodney");
+        heroTwo.setSuperPower(powerTwo);
+        heroTwo.setDescription("Uncool");
+        
+        heroListOne.add(heroOne);
+        heroListTwo.add(heroTwo);
         
         Organization orgOne = new Organization();
+        orgOne.setOrgId(1);
+        orgOne.setOrgName("SG");
+        orgOne.setOrgDesc("Super");
+        orgOne.setAddress("345 Way");
+        orgOne.setEmail("sg.com");
+        orgOne.setPhone("123-324-3456");
+        orgOne.setMembers(heroListOne);
         
         Organization orgTwo = new Organization();
+        orgTwo.setOrgId(2);
+        orgTwo.setOrgName("SHS");
+        orgTwo.setOrgDesc("Semi-Super");
+        orgTwo.setAddress("456 Drive");
+        orgTwo.setEmail("shs.com");
+        orgTwo.setPhone("234-345-4567");
+        orgTwo.setMembers(heroListTwo);
+        
+        allOrgs.add(orgOne);
+        allOrgs.add(orgTwo);
     }
     
      @Override

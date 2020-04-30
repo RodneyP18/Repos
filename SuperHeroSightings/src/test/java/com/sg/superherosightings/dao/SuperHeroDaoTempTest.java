@@ -25,17 +25,32 @@ public class SuperHeroDaoTempTest {
     @BeforeEach
     public void setUp() {
         
-        
     }
     
-    @Test
-    public void getRecentSightingsGoldenPath() {
-        List<Sighting> recentSightings = superTempTest.getTenRecentSights();
-        
-       
-        
-        
-    }
+//    @Test
+//    public void getRecentSightingsGoldenPath() {
+//        List<Sighting> recentSightings = superTempTest.getTenRecentSights();
+//        
+//    }
+//    
+//    @Test
+//    public void deleteHeroGoldenPath() {
+//        superTempTest.deleteHero(1);
+//        
+//    }
+//    
+//    @Test
+//    public void deletePowerGoldenPath(){
+//        superTempTest.deletePower(1);
+//        
+//    }
+//    
+//    @Test
+//    public void deleteLocationGoldenPath(){
+//        superTempTest.deleteLocation(1);
+//        
+//    }
+
     
     
 

@@ -7,6 +7,7 @@ package TempDaoTest;
 
 import com.sg.superherosightings.models.Location;
 import com.sg.superherosightings.repository.LocationRep;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -26,8 +27,23 @@ public class LocRepInMem implements LocationRep{
     public LocRepInMem(){
         
         Location locationOne = new Location();
+        locationOne.setLocationId(1);
+        locationOne.setLocationName("Minneapolis");
+        locationOne.setLocationDesc("Cool");
+        locationOne.setAddress("123 Way");
+        locationOne.setLatitude(BigDecimal.valueOf(90));
+        locationOne.setLongitude(BigDecimal.valueOf(180));
         
         Location locationTwo = new Location();
+        locationTwo.setLocationId(2);
+        locationTwo.setLocationName("New York");
+        locationTwo.setLocationDesc("Uncool");
+        locationTwo.setAddress("234 Drive");
+        locationTwo.setLatitude(BigDecimal.valueOf(89));
+        locationTwo.setLongitude(BigDecimal.valueOf(179));
+        
+        allLocations.add(locationOne);
+        allLocations.add(locationTwo);
     }
     
     

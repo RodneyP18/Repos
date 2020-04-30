@@ -6,6 +6,7 @@
 package TempDaoTest;
 
 import com.sg.superherosightings.models.Hero;
+import com.sg.superherosightings.models.Organization;
 import com.sg.superherosightings.models.Power;
 import com.sg.superherosightings.repository.HeroRep;
 import java.util.ArrayList;
@@ -25,31 +26,44 @@ public class HeroRepInMem implements HeroRep {
     List<Hero> allHeroes = new ArrayList<>();
 
     public HeroRepInMem() {
+        List<Organization> orgListOne = new ArrayList<>();
+        List<Organization> orgListTwo = new ArrayList<>();
         
-//        Power powerOne = new Power();
-//        powerOne.setPowerId(1);
-//        powerOne.setSuperPower("Flying");
-//        
-//        Power powerTwo = new Power();
-//        powerTwo.setPowerId(2);
-//        powerTwo.setSuperPower("Speed");
-//
-//        Hero heroOne = new Hero();
-//        heroOne.setHeroId(1);
-//        heroOne.setName("Buddy");
-//        heroOne.setSuperPower(powerOne);
-//        heroOne.setDescription("Cool");
-//        heroOne.setOrgs(orgs);
-//
-//        Hero heroTwo = new Hero();
-//        heroTwo.setHeroId(1);
-//        heroTwo.setName("Rodney");
-//        heroTwo.setSuperPower(powerTwo);
-//        heroTwo.setDescription("Uncool");
-//        heroTwo.setOrgs(orgs);
-//        
-//        allHeroes.add(heroOne);
-//        allHeroes.add(heroTwo);
+        Power powerOne = new Power();
+        powerOne.setPowerId(1);
+        powerOne.setSuperPower("Flying");
+        
+        Power powerTwo = new Power();
+        powerTwo.setPowerId(2);
+        powerTwo.setSuperPower("Speed");
+        
+        Organization orgOne = new Organization();
+        orgOne.setOrgId(1);
+        orgOne.setOrgName("SG");
+        
+        Organization orgTwo = new Organization();
+        orgTwo.setOrgId(2);
+        orgTwo.setOrgName("SHS");
+        
+        orgListOne.add(orgOne);
+        orgListTwo.add(orgTwo);
+        
+        Hero heroOne = new Hero();
+        heroOne.setHeroId(1);
+        heroOne.setName("Buddy");
+        heroOne.setSuperPower(powerOne);
+        heroOne.setDescription("Cool");
+        heroOne.setOrgs(orgListOne);
+
+        Hero heroTwo = new Hero();
+        heroTwo.setHeroId(2);
+        heroTwo.setName("Rodney");
+        heroTwo.setSuperPower(powerTwo);
+        heroTwo.setDescription("Uncool");
+        heroTwo.setOrgs(orgListTwo);
+        
+        allHeroes.add(heroOne);
+        allHeroes.add(heroTwo);
        
     }
     
