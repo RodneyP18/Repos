@@ -76,6 +76,18 @@ public class OrgRepInMem implements OrganizationRep{
     
      @Override
     public <S extends Organization> S save(S toSave) {
+        int index = 0;
+        
+        for (int i = 0; i < allOrgs.size(); i++) {
+            
+            Organization toGet = allOrgs.get(i);
+            
+            if (toSave.getOrgId() == toGet.getOrgId()) {
+               index = i;
+               allOrgs.set(index, toSave);
+               return toSave;
+            }
+        }
         
         toSave.setOrgId(allOrgs.stream().mapToInt( a -> a.getOrgId() ).max().orElse(0) + 1);
         

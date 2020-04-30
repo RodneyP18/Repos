@@ -54,6 +54,18 @@ public class LocRepInMem implements LocationRep{
 
     @Override
     public <S extends Location> S save(S toSave) {
+        int index = 0;
+        
+        for (int i = 0; i < allLocations.size(); i++) {
+            
+            Location toGet = allLocations.get(i);
+            
+            if (toSave.getLocationId() == toGet.getLocationId()) {
+               index = i;
+               allLocations.set(index, toSave);
+               return toSave;
+            }
+        }
         
         toSave.setLocationId(allLocations.stream().mapToInt( a -> a.getLocationId() ).max().orElse(0) + 1);
         

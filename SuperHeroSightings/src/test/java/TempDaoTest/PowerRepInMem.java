@@ -39,6 +39,18 @@ public class PowerRepInMem implements PowerRep{
     
     @Override
     public <S extends Power> S save(S toSave) {
+        int index = 0;
+        
+        for (int i = 0; i < allPowers.size(); i++) {
+            
+            Power toGet = allPowers.get(i);
+            
+            if (toSave.getPowerId() == toGet.getPowerId()) {
+               index = i;
+               allPowers.set(index, toSave);
+               return toSave;
+            }
+        }
         
         toSave.setPowerId(allPowers.stream().mapToInt( a -> a.getPowerId() ).max().orElse(0) + 1);
         

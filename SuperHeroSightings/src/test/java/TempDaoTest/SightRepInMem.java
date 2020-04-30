@@ -54,7 +54,7 @@ public class SightRepInMem implements SightingRep {
         
         Location locationTwo = new Location();
         locationTwo.setLocationId(2);
-        locationOne.setLocationName("New York");
+        locationTwo.setLocationName("New York");
 
         Sighting sightOne = new Sighting();
         sightOne.setSightingId(1);
@@ -69,76 +69,88 @@ public class SightRepInMem implements SightingRep {
         sightTwo.setSightingDate(LocalDate.of(2020, 4, 4));
         
         Sighting sightThree = new Sighting();
-        sightOne.setSightingId(3);
-        sightOne.setSuperHero(heroOne);
-        sightOne.setHeroLocation(locationOne);
-        sightOne.setSightingDate(LocalDate.of(2020, 4, 6));
+        sightThree.setSightingId(3);
+        sightThree.setSuperHero(heroOne);
+        sightThree.setHeroLocation(locationOne);
+        sightThree.setSightingDate(LocalDate.of(2020, 4, 6));
         
         Sighting sightFour = new Sighting();
-        sightOne.setSightingId(4);
-        sightOne.setSuperHero(heroTwo);
-        sightOne.setHeroLocation(locationOne);
-        sightOne.setSightingDate(LocalDate.of(2020, 4, 8));
+        sightFour.setSightingId(4);
+        sightFour.setSuperHero(heroTwo);
+        sightFour.setHeroLocation(locationOne);
+        sightFour.setSightingDate(LocalDate.of(2020, 4, 8));
         
         Sighting sightFive = new Sighting();
-        sightOne.setSightingId(5);
-        sightOne.setSuperHero(heroOne);
-        sightOne.setHeroLocation(locationOne);
-        sightOne.setSightingDate(LocalDate.of(2020, 4, 10));
+        sightFive.setSightingId(5);
+        sightFive.setSuperHero(heroOne);
+        sightFive.setHeroLocation(locationOne);
+        sightFive.setSightingDate(LocalDate.of(2020, 4, 10));
         
         Sighting sightSix = new Sighting();
-        sightOne.setSightingId(6);
-        sightOne.setSuperHero(heroTwo);
-        sightOne.setHeroLocation(locationOne);
-        sightOne.setSightingDate(LocalDate.of(2020, 4, 12));
+        sightSix.setSightingId(6);
+        sightSix.setSuperHero(heroTwo);
+        sightSix.setHeroLocation(locationOne);
+        sightSix.setSightingDate(LocalDate.of(2020, 4, 12));
         
         Sighting sightSeven = new Sighting();
-        sightOne.setSightingId(7);
-        sightOne.setSuperHero(heroOne);
-        sightOne.setHeroLocation(locationOne);
-        sightOne.setSightingDate(LocalDate.of(2020, 4, 14));
+        sightSeven.setSightingId(7);
+        sightSeven.setSuperHero(heroOne);
+        sightSeven.setHeroLocation(locationOne);
+        sightSeven.setSightingDate(LocalDate.of(2020, 4, 14));
         
         Sighting sightEight = new Sighting();
-        sightOne.setSightingId(8);
-        sightOne.setSuperHero(heroTwo);
-        sightOne.setHeroLocation(locationOne);
-        sightOne.setSightingDate(LocalDate.of(2020, 4, 16));
+        sightEight.setSightingId(8);
+        sightEight.setSuperHero(heroTwo);
+        sightEight.setHeroLocation(locationOne);
+        sightEight.setSightingDate(LocalDate.of(2020, 4, 16));
         
         Sighting sightNine = new Sighting();
-        sightOne.setSightingId(9);
-        sightOne.setSuperHero(heroOne);
-        sightOne.setHeroLocation(locationOne);
-        sightOne.setSightingDate(LocalDate.of(2020, 4, 18));
+        sightNine.setSightingId(9);
+        sightNine.setSuperHero(heroOne);
+        sightNine.setHeroLocation(locationOne);
+        sightNine.setSightingDate(LocalDate.of(2020, 4, 18));
         
         Sighting sightTen = new Sighting();
-        sightOne.setSightingId(10);
-        sightOne.setSuperHero(heroTwo);
-        sightOne.setHeroLocation(locationOne);
-        sightOne.setSightingDate(LocalDate.of(2020, 4, 20));
+        sightTen.setSightingId(10);
+        sightTen.setSuperHero(heroTwo);
+        sightTen.setHeroLocation(locationOne);
+        sightTen.setSightingDate(LocalDate.of(2020, 4, 20));
         
         Sighting sightEleven = new Sighting();
-        sightOne.setSightingId(11);
-        sightOne.setSuperHero(heroTwo);
-        sightOne.setHeroLocation(locationTwo);
-        sightOne.setSightingDate(LocalDate.of(2020, 4, 22));
+        sightEleven.setSightingId(11);
+        sightEleven.setSuperHero(heroTwo);
+        sightEleven.setHeroLocation(locationTwo);
+        sightEleven.setSightingDate(LocalDate.of(2020, 4, 22));
         
-        allSightings.add(sightOne);
-        allSightings.add(sightTwo);
-        allSightings.add(sightThree);
-        allSightings.add(sightFour);
-        allSightings.add(sightFive);
-        allSightings.add(sightSix);
-        allSightings.add(sightSeven);
-        allSightings.add(sightEight);
-        allSightings.add(sightNine);
-        allSightings.add(sightTen);
-        allSightings.add(sightEleven);
+        allSightings.add(0, sightOne);
+        allSightings.add(1, sightTwo);
+        allSightings.add(2, sightThree);
+        allSightings.add(3, sightFour);
+        allSightings.add(4, sightFive);
+        allSightings.add(5, sightSix);
+        allSightings.add(6, sightSeven);
+        allSightings.add(7, sightEight);
+        allSightings.add(8, sightNine);
+        allSightings.add(9, sightTen);
+        allSightings.add(10, sightEleven);
         
         
     }
     
     @Override
     public <S extends Sighting> S save(S toSave) {
+        int index = 0;
+        
+        for (int i = 0; i < allSightings.size(); i++) {
+            
+            Sighting toGet = allSightings.get(i);
+            
+            if (toSave.getSightingId() == toGet.getSightingId()) {
+               index = i;
+               allSightings.set(index, toSave);
+               return toSave;
+            }
+        }
         
         toSave.setSightingId(allSightings.stream().mapToInt( a -> a.getSightingId() ).max().orElse(0) + 1);
         
