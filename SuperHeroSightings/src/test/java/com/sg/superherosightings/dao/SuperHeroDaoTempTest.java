@@ -9,162 +9,163 @@ import com.sg.superherosightings.models.Hero;
 import com.sg.superherosightings.models.Location;
 import com.sg.superherosightings.models.Power;
 import com.sg.superherosightings.models.Sighting;
+import com.sg.superherosightings.repository.HeroRep;
+import com.sg.superherosightings.repository.LocationRep;
+import com.sg.superherosightings.repository.PowerRep;
+import com.sg.superherosightings.repository.SightingRep;
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.jdbc.core.JdbcTemplate;
 
 /**
  *
  * @author Buddy
  */
+@SpringBootTest
 public class SuperHeroDaoTempTest {
     
-    SuperHeroDaoTemp superTempTest;
-    
-    List<Sighting> allSightings = new ArrayList<>();
-    
+    @Autowired
+    JdbcTemplate template;
+
+    @Autowired
+    SuperHeroDao superTempTest = new SuperHeroDaoTemp();
+
+    @Autowired
+    HeroRep heroRepTest;
+
+    @Autowired
+    LocationRep locRepTest;
+
+    @Autowired
+    PowerRep powerRepTest;
+
+    @Autowired
+    SightingRep sightRepTest;
+
     public SuperHeroDaoTempTest() {
+        
     }
-    
-    
+
     @BeforeEach
     public void setUp() {
         
-        Power powerOne = new Power();
-        powerOne.setPowerId(1);
-        powerOne.setSuperPower("Flying");
+        String DELETE_SIGHTING = "DELETE FROM Sightings";
+        template.update(DELETE_SIGHTING);
         
-        Power powerTwo = new Power();
-        powerTwo.setPowerId(2);
-        powerTwo.setSuperPower("Speed");
+        String DELETE_LOCATION = "DELETE FROM Locations";
+        template.update(DELETE_LOCATION);
         
-        Hero heroOne = new Hero();
-        heroOne.setHeroId(1);
-        heroOne.setName("Buddy");
-        heroOne.setSuperPower(powerOne);
-        heroOne.setDescription("Cool");
+        String DELETE_HERO = "DELETE FROM Heroes";
+        template.update(DELETE_HERO);
         
-        Hero heroTwo = new Hero();
-        heroTwo.setHeroId(2);
-        heroTwo.setName("Rodney");
-        heroTwo.setSuperPower(powerTwo);
-        heroTwo.setDescription("Uncool");
+        String DELETE_POWER = "DELETE FROM Powers";
+        template.update(DELETE_POWER);
         
-        Location locationOne = new Location();
-        locationOne.setLocationId(1);
-        locationOne.setLocationName("Minneapolis");
+        template.update("Insert into Powers Values ('1', 'Flying'), ('2', 'Speed'), ('3', 'Something');");
         
-        Location locationTwo = new Location();
-        locationTwo.setLocationId(2);
-        locationOne.setLocationName("New York");
+        template.update("Insert into Heroes Values ('1', 'Buddy', 'Cool', '1'), ('2', 'Rodney', 'Uncool', '2'),('3', 'David', 'Coder', '3');");
         
-        Sighting sightOne = new Sighting();
-        sightOne.setSightingId(1);
-        sightOne.setSuperHero(heroOne);
-        sightOne.setHeroLocation(locationOne);
-        sightOne.setSightingDate(LocalDate.of(2020, 4, 2));
+        template.update("Insert into Locations Values ('1', 'MN', 'Winter', '123 Way', '90', '180'),('2', 'NY', 'Summer', '234 Drive', '89', '179');");
+        
+        template.update("Insert into Sightings Values ('1', '1', '1', '2020-04-02'),('2', '2', '2', '2020-04-04'),"
+                + "('3', '3', '1', '2020-04-06'),('4', '1', '2', '2020-04-08'),('5', '2', '1', '2020-04-10'),('6', '3', '2', '2020-04-12'),"
+                + "('7', '1', '1', '2020-04-14'),('8', '2', '2', '2020-04-16'),('9', '3', '1', '2020-04-18'),('10', '1', '2', '2020-04-20'),"
+                + "('11', '2', '1', '2020-04-22');");
 
-        Sighting sightTwo = new Sighting();
-        sightTwo.setSightingId(2);
-        sightTwo.setSuperHero(heroTwo);
-        sightTwo.setHeroLocation(locationTwo);
-        sightTwo.setSightingDate(LocalDate.of(2020, 4, 4));
-        
-        Sighting sightThree = new Sighting();
-        sightOne.setSightingId(3);
-        sightOne.setSuperHero(heroOne);
-        sightOne.setHeroLocation(locationOne);
-        sightOne.setSightingDate(LocalDate.of(2020, 4, 6));
-        
-        Sighting sightFour = new Sighting();
-        sightOne.setSightingId(4);
-        sightOne.setSuperHero(heroTwo);
-        sightOne.setHeroLocation(locationOne);
-        sightOne.setSightingDate(LocalDate.of(2020, 4, 8));
-        
-        Sighting sightFive = new Sighting();
-        sightOne.setSightingId(5);
-        sightOne.setSuperHero(heroOne);
-        sightOne.setHeroLocation(locationOne);
-        sightOne.setSightingDate(LocalDate.of(2020, 4, 10));
-        
-        Sighting sightSix = new Sighting();
-        sightOne.setSightingId(6);
-        sightOne.setSuperHero(heroTwo);
-        sightOne.setHeroLocation(locationOne);
-        sightOne.setSightingDate(LocalDate.of(2020, 4, 12));
-        
-        Sighting sightSeven = new Sighting();
-        sightOne.setSightingId(7);
-        sightOne.setSuperHero(heroOne);
-        sightOne.setHeroLocation(locationOne);
-        sightOne.setSightingDate(LocalDate.of(2020, 4, 14));
-        
-        Sighting sightEight = new Sighting();
-        sightOne.setSightingId(8);
-        sightOne.setSuperHero(heroTwo);
-        sightOne.setHeroLocation(locationOne);
-        sightOne.setSightingDate(LocalDate.of(2020, 4, 16));
-        
-        Sighting sightNine = new Sighting();
-        sightOne.setSightingId(9);
-        sightOne.setSuperHero(heroOne);
-        sightOne.setHeroLocation(locationOne);
-        sightOne.setSightingDate(LocalDate.of(2020, 4, 18));
-        
-        Sighting sightTen = new Sighting();
-        sightOne.setSightingId(10);
-        sightOne.setSuperHero(heroTwo);
-        sightOne.setHeroLocation(locationOne);
-        sightOne.setSightingDate(LocalDate.of(2020, 4, 20));
-        
-        Sighting sightEleven = new Sighting();
-        sightOne.setSightingId(11);
-        sightOne.setSuperHero(heroTwo);
-        sightOne.setHeroLocation(locationTwo);
-        sightOne.setSightingDate(LocalDate.of(2020, 4, 22));
-        
-        allSightings.add(sightOne);
-        allSightings.add(sightTwo);
-        allSightings.add(sightThree);
-        allSightings.add(sightFour);
-        allSightings.add(sightFive);
-        allSightings.add(sightSix);
-        allSightings.add(sightSeven);
-        allSightings.add(sightEight);
-        allSightings.add(sightNine);
-        allSightings.add(sightTen);
-        allSightings.add(sightEleven);
-        
     }
-    
-//    @Test
-//    public void getRecentSightingsGoldenPath() {
-//        List<Sighting> recentSightings = superTempTest.getTenRecentSights();
-//        
-//    }
-//    
-//    @Test
-//    public void deleteHeroGoldenPath() {
-//        superTempTest.deleteHero(1);
-//        
-//    }
-//    
-//    @Test
-//    public void deletePowerGoldenPath(){
-//        superTempTest.deletePower(1);
-//        
-//    }
-//    
-//    @Test
-//    public void deleteLocationGoldenPath(){
-//        superTempTest.deleteLocation(1);
-//        
-//    }
 
-    
-    
+    @Test
+    public void getRecentSightingsGoldenPath() {
+        List<Sighting> recentSightings = superTempTest.getTenRecentSights();
+
+        assertEquals(10, recentSightings.size());
+
+        Sighting mostRecentDate = recentSightings.get(0);
+        
+        assertEquals(11, mostRecentDate.getSightingId());
+        assertEquals("Rodney", mostRecentDate.getSuperHero().getName());
+        assertEquals("MN", mostRecentDate.getHeroLocation().getLocationName());
+        assertEquals(LocalDate.of(2020, 04, 22), mostRecentDate.getSightingDate());
+        
+        Sighting secondRecentDate = recentSightings.get(1);
+        
+        assertEquals(10, secondRecentDate.getSightingId());
+        assertEquals(LocalDate.of(2020, 04, 20), secondRecentDate.getSightingDate());
+        
+        Sighting thirdRecentDate = recentSightings.get(2);
+        
+        assertEquals(9, thirdRecentDate.getSightingId());
+        assertEquals(LocalDate.of(2020, 04, 18), thirdRecentDate.getSightingDate());
+        
+        Sighting fourthRecentDate = recentSightings.get(3);
+        
+        assertEquals(8, fourthRecentDate.getSightingId());
+        assertEquals(LocalDate.of(2020, 04, 16), fourthRecentDate.getSightingDate());
+        
+        Sighting fifthRecentDate = recentSightings.get(4);
+        
+        assertEquals(7, fifthRecentDate.getSightingId());
+        assertEquals(LocalDate.of(2020, 04, 14), fifthRecentDate.getSightingDate());
+        
+        Sighting sixthRecentDate = recentSightings.get(5);
+        
+        assertEquals(6, sixthRecentDate.getSightingId());
+        assertEquals(LocalDate.of(2020, 04, 12), sixthRecentDate.getSightingDate());
+        
+        Sighting seventhRecentDate = recentSightings.get(6);
+        
+        assertEquals(5, seventhRecentDate.getSightingId());
+        assertEquals(LocalDate.of(2020, 04, 10), seventhRecentDate.getSightingDate());
+        
+        Sighting eighthRecentDate = recentSightings.get(7);
+        
+        assertEquals(4, eighthRecentDate.getSightingId());
+        assertEquals(LocalDate.of(2020, 04, 8), eighthRecentDate.getSightingDate());
+        
+        Sighting ninthRecentDate = recentSightings.get(8);
+        
+        assertEquals(3, ninthRecentDate.getSightingId());
+        assertEquals(LocalDate.of(2020, 04, 06), ninthRecentDate.getSightingDate());
+        
+        Sighting tenthRecentDate = recentSightings.get(9);
+        
+        assertEquals(2, tenthRecentDate.getSightingId());
+        assertEquals("Rodney", tenthRecentDate.getSuperHero().getName());
+        assertEquals("NY", tenthRecentDate.getHeroLocation().getLocationName());
+        assertEquals(LocalDate.of(2020, 04, 04), tenthRecentDate.getSightingDate());
+
+        
+
+    }
+
+    @Test
+    public void deleteHeroGoldenPath() {
+        superTempTest.deleteHero(1);
+        List<Hero> allHeroes = heroRepTest.findAll();
+
+        assertEquals(2, allHeroes.size());
+
+    }
+
+    @Test
+    public void deletePowerGoldenPath() {
+        superTempTest.deletePower(1);
+        List<Power> allPowers = powerRepTest.findAll();
+
+        assertEquals(2, allPowers.size());
+    }
+
+    @Test
+    public void deleteLocationGoldenPath() {
+        superTempTest.deleteLocation(1);
+        List<Location> allLocations = locRepTest.findAll();
+
+        assertEquals(1, allLocations.size());
+    }
 
 }

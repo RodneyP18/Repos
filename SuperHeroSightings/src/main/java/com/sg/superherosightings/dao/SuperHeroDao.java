@@ -13,6 +13,7 @@ import java.util.List;
  * @author Buddy
  */
 public interface SuperHeroDao {
+    
     public List<Sighting> getTenRecentSights();
     
     public void deleteHero(Integer id);
